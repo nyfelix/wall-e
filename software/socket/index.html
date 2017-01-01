@@ -1,0 +1,15 @@
+<html>
+<head>
+<script src="/socket.io/socket.io.js"></script>  
+<script>  
+    var socket = io.connect('/ws');
+    socket.on('announcements', function(data) {
+        console.log('Got announcement:', data.message);
+    });
+    socket.emit('event', { message: 'Hey, I have an important message!' });
+</script>  
+</head>
+<body>
+	<h1>Hi, I'm Wall.e</h1>
+</body>
+</html>

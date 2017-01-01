@@ -1,0 +1,32 @@
+{
+  "name": "wall-e-socket",
+  "version": "0.0.1",
+  "description": "A simple websocket to allow reomte controll of an arduino IoT device via websocket on a connected raspberry pi",
+  "author": "felix.nyffenegger@hsr.ch",
+  "contributors": [],
+  "scripts": {
+    "start": "node serial.js"
+  },
+  "main": "serial.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nyfelix/wall-e"
+  },
+  "bugs": {
+    "url": "https://github.com/nyfelix/wall-e/issues"
+  },
+  "keywords": [
+    "IoT",
+    "Arduino",
+    "Raspberry Pi",
+    "Websocket"
+  ],
+  "dependencies": {
+    "ws": "*",
+    "serialport": "*"
+  },
+  "preferGlobal": true,
+  "private": true,
+  "analyze": true,
+  "license": "MIT"
+}
