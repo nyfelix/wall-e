@@ -1,0 +1,3 @@
+[submodule "software/control/lib/modular"]
+	path = software/control/lib/modular
+	url = https://github.com/HSRLCLab/modular.git
