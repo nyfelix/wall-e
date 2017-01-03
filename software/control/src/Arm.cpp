@@ -1,36 +1,4 @@
-#include <Arduino.h>
-#include <Servo.h>
-
-// CAREFUL: STAY IN RANGE
-// Range of Micro servo Tower Pro SG90: 200-1000
-// Range of FITEC FS5106B: (180)200-550(570) = 180
-
-// Define Arm as Class to instantiate a left and a right arm
-
-#define HANDMIN   0
-#define HANDMAX  65
-#define ARMMIN   10 // 200 has Colissionwith Caterpillar
-#define ARMMAX  110
-
-class Arm {
-  public:
-    Arm(uint8_t pServoHand, uint8_t pServoArm);
-    void test();
-    int moveHand(int pos);
-    int moveArm (int pos);
-  private:
-    uint8_t pServoHand;
-    uint8_t pServoArm;
-    Servo servoHand;
-    Servo servoArm;
-    int handPos;
-    int armPos;
-};
-// our servo # counter
-
-
-
-
+#include <arm.h>
 
 Arm::Arm(uint8_t pServoHand, uint8_t pServoArm) {
   servoHand.attach(pServoHand);
@@ -45,11 +13,11 @@ void Arm::test() {
     servoHand.write(pos);
     delay(15);
   }
-  for (int pos = ARMMIN; pos <= ARMMAX; pos += 1) {
+  /*for (int pos = ARMMIN; pos <= ARMMAX; pos += 1) {
     // in steps of 1 degree
     servoArm.write(pos);
     delay(15);
-  }
+  }*/
 }
 
 // Move hand to x% between min and max
