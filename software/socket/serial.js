@@ -20,9 +20,9 @@ wss.on('connection', function connection(ws) {
   gws = ws;
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    if(serial && serial.isOpen){
-		serial.write(message);
-	}
+    if(serial){
+  		serial.write(message);
+  	}
   });
 
   console.log('Websocket Connected: ' + ws.address);
@@ -33,19 +33,20 @@ wss.on('connection', function connection(ws) {
 // Create Serial Port Server
 
 //var serialName = '/dev/ttyATH0'; // for my YUN (the same for everyone)
-var serialName = '/dev/cu.usbmodemfd141'; // for my laptop (different for everyone)
+//var serialName = '/dev/cu.usbmodemfd141'; // for my laptop (different for everyone)
+var serialName = '/dev/cu.usbmodemfa121'; // for my laptop (different for everyone)
 var serial = undefined;
 
 // create the port
 var serial = new Port(serialName,{
-	'baudrate':115200, // the Arduino's baud rate
+	'baudrate':9600, // the Arduino's baud rate
 	'parser' : SerialPort.parsers.readline('\r\n') // arduino ends messages with .println()
 });
 
 // this event fires when the serial port opens
 serial.on('open',function(){
 	console.log('Serial port is OPEN');
-	serial.isOpen = true; // our own little variable, to tell us the port opened
+	//serial.isOpen = true; // our own little variable, to tell us the port opened
 });
 
 // this event fires when we get data from the arduino
