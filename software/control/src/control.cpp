@@ -55,6 +55,6 @@ void setup() {
 
 void loop() {
   // Get clients coming from server
-  api->run();
+  api->loop();
   delay(1); // Poll every 1ms
 }
