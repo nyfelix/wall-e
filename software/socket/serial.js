@@ -21,7 +21,8 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
     if(serial){
-  		serial.write(message);
+  		serial.write(message + "\r\n");
+      console.log('Sent to Arduino: %s', message);
   	} else {
       ws.send(message);
     }
@@ -36,14 +37,14 @@ wss.on('connection', function connection(ws) {
 
 //var serialName = '/dev/ttyATH0'; // for my YUN (the same for everyone)
 //var serialName = '/dev/cu.usbmodemfd141'; // for my laptop (different for everyone)
-var serial = undefined;
 
 SerialPort.list(function (err, ports) {
   ports.forEach(function(port) {
       console.log(port.comName);
-      if (port.manufacturer == 'Arduino (www.arduino.cc)') {
+      console.log(port.manufacturer);
+      if (port.manufacturer && port.manufacturer.startsWith("Arduino")) {
         // create the port
-        var serial = new Port(port.comName,{
+        serial = new Port(port.comName,{
         	'baudrate':9600, // the Arduino's baud rate
         	'parser' : SerialPort.parsers.readline('\r\n') // arduino ends messages with .println()
         });
@@ -66,9 +67,9 @@ SerialPort.list(function (err, ports) {
         	}
         });
       };
-      if (serial == undefined) {
-        console.log("No Arduino found on serial connection.");
-        console.log("Websocket will just return the value you sent...");
-      }
   });
+  if (serial == undefined) {
+    console.log("No Arduino found on serial connection.");
+    console.log("Websocket will just return the value you sent...");
+  }
 });
